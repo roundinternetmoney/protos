@@ -1,0 +1,5 @@
+-uses bufbuild/buf-action@v1
+  with:
+    input: proto
+    push: true
+    token: ${{ secrets.BUF_TOKEN }}
