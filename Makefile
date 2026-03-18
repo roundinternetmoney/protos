@@ -6,11 +6,11 @@ PATCH_VERSION := $(shell echo $(VERSION) | awk -F. '{printf "%d.%d.%d", $$1, $$2
 NEW_VERSION ?= $(PATCH_VERSION)
 
 buf:
+	buf dep update
 	buf lint
 	buf build
 
-all: buf
-	buf dep update
+all: buf	
 	buf push
 
 version:
@@ -21,7 +21,7 @@ tag:
 	git tag -a v$(NEW_VERSION) -m "Release v$(NEW_VERSION)"
 	git push origin v$(NEW_VERSION)
 
-release: buf tag
+release: tag
 	gh release create v$(NEW_VERSION) \
 		--title "v$(NEW_VERSION)" \
 		--notes "Release v$(NEW_VERSION)"
