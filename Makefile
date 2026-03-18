@@ -6,7 +6,6 @@ PATCH_VERSION := $(shell echo $(VERSION) | awk -F. '{printf "%d.%d.%d", $$1, $$2
 NEW_VERSION ?= $(PATCH_VERSION)
 
 buf:
-	buf dep update
 	buf lint
 	buf build
 
