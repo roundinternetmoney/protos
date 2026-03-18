@@ -9,18 +9,18 @@ import "base/v1/position.proto";
 import "base/v1/account.proto";
 import "base/v1/asset.proto";
 
-enum Exchange {
-  EXCHANGE_UNSPECIFIED = 0;
-  EXCHANGE_ASTER = 1;
-  EXCHANGE_ETHEREAL = 2;
-  EXCHANGE_HYPERLIQUID = 3;
-  EXCHANGE_BINANCE = 4;
-  EXCHANGE_BYBIT = 5;
-  EXCHANGE_HTX = 6;
+enum Dex {
+  DEX_UNSPECIFIED = 0;
+  DEX_ASTER = 1;
+  DEX_ETHEREAL = 2;
+  DEX_HYPERLIQUID = 3;
+  DEX_BINANCE = 4;
+  DEX_BYBIT = 5;
+  DEX_HTX = 6;
 }
 
-message ExchangeEnvelope {
-  Exchange exchange = 1;
+message DexEnvelope {
+  Dex dex = 1;
   uint64 sequence = 2;
   int64 ts = 3;
   oneof payload {
