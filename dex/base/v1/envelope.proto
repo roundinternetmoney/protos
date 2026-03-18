@@ -27,7 +27,7 @@ message ExchangeEnvelope {
     BookDiff diff = 4;
     PositionSnapshot pos = 5;
     MarginSnapshot margin = 6;
-    AssetSnapshot asset = 7;
+    AssetBaseSnapshot asset = 7;
     Mids mids = 8;
   }
 }

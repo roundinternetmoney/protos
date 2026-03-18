@@ -8,7 +8,7 @@ import "ethereal/v1/order.proto";
 import "google/protobuf/struct.proto";
 
 
-message EventMessage {
+message EventMessage { // TODO: see if unverified_lazy tag applies  
     string e = 1; // event
 }
 

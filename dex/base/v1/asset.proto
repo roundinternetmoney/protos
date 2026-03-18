@@ -4,7 +4,17 @@ option go_package = "github.com/roundinternetmoney/proto-dex;pb";
 
 package base.v1;
 
+import "aster/v1/aster.proto";
+import "ethereal/v1/rest.proto";
+
 message Asset {
+  oneof asset {
+    aster.v1.AssetSnapshot aster = 1;
+    ethereal.v1.AssetSnapshot ethereal = 2; 
+  }
+}
+
+message AssetBase {
   string ticker = 1;
   string id = 2;
   double min_quantity = 12;
@@ -13,6 +23,6 @@ message Asset {
   double tick_size = 15;
 }
 
-message AssetSnapshot {
-    repeated Asset a = 1;
+message AssetBaseSnapshot {
+    repeated AssetBase a = 1;
 }

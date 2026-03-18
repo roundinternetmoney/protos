@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option go_package = "github.com/roundinternetmoney/proto-dex;pb";
+
+package ethereal.v1;
+
+import "ethereal/v1/order.proto";
+
+message Asset {
+    string id = 1;
+    string ticker = 2;
+    string display_ticker = 3;
+    OrderEngine engine_type = 4;
+    int64  onchain_id = 5;
+    string lot_size = 6;
+    string tick_size = 7;
+    string maker_fee = 8;
+    string taker_fee = 9;
+    string max_quantity = 10;
+    string min_quantity = 11;
+    string volume24h = 12;
+    string funding_rate1h = 13;
+    string max_open_interest_usd = 14;
+    string max_position_notional_usd = 15;
+}
+
+message AssetSnapshot {
+    repeated Asset a = 1;
+}

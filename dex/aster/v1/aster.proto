@@ -10,11 +10,11 @@ message StreamMessage {
 }
 //TODO: Account Information V4 (USER_DATA) 
 
-message ExchangeInfo {
-  repeated Symbol symbols = 1;
+message AssetSnapshot {
+  repeated Asset symbols = 1;
 }
 
-message Symbol {
+message Asset {
   string symbol = 1;
   repeated Filter filters = 2;
 }
@@ -45,11 +45,11 @@ message AccountInfo {
   string available_balance = 15;
   string max_withdraw_amount = 16;
 
-  repeated Asset assets = 17;
+  repeated Margin assets = 17;
   repeated AsterPosition positions = 18;
 }
 
-message Asset {
+message Margin {
   string asset = 1;
   string wallet_balance = 2;
   string unrealized_profit = 3;
