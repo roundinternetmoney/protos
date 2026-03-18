@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option go_package = "github.com/roundinternetmoney/proto-dex;pb";
+
+package base.v1;
+
+import "base/v1/book.proto";
+import "base/v1/position.proto";
+import "base/v1/account.proto";
+import "base/v1/asset.proto";
+
+enum Exchange {
+  EXCHANGE_UNSPECIFIED = 0;
+  EXCHANGE_ASTER = 1;
+  EXCHANGE_ETHEREAL = 2;
+  EXCHANGE_HYPERLIQUID = 3;
+  EXCHANGE_BINANCE = 4;
+  EXCHANGE_BYBIT = 5;
+  EXCHANGE_HTX = 6;
+}
+
+message ExchangeEnvelope {
+  Exchange exchange = 1;
+  uint64 sequence = 2;
+  int64 ts = 3;
+  oneof payload {
+    BookDiff diff = 4;
+    PositionSnapshot pos = 5;
+    MarginSnapshot margin = 6;
+    AssetSnapshot asset = 7;
+    Mids mids = 8;
+  }
+}

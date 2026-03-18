@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "github.com/roundinternetmoney/proto-dex;pb";
+
+package base.v1;
+
+message Position {
+  string symbol = 1;
+  double size = 2;
+  optional double entry_price = 3;
+  optional double mark_price = 4;
+  optional double margin = 5;
+}
+message PositionSnapshot {
+  repeated Position p = 1;
+}

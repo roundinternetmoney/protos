@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "github.com/roundinternetmoney/proto-dex;pb";
+
+package base.v1;
+
+message BookLevel {
+  string price = 1;
+  string size = 2;
+}
+
+message BookDiff {
+  string asset = 1;
+  int64 timestamp = 2;
+  int64 previous_timestamp = 3;
+
+  repeated BookLevel asks = 4;
+  repeated BookLevel bids = 5;
+}
+
+message Mid {
+  string asset = 1; 
+  double px = 2;
+}
+
+message Mids {
+  repeated Mid m = 1;
+}

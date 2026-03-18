@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "github.com/roundinternetmoney/proto-dex;pb";
+
+package base.v1;
+
+message Margin {
+  string id = 1;
+  string asset = 2;
+  double margin_balance = 3;
+  double available_balance = 4;
+  optional double frozen = 5;
+}
+
+message MarginSnapshot {
+    repeated Margin m = 7;
+}
