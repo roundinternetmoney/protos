@@ -1,3 +1,5 @@
+// example server client using nats/micro and protoc-gen-go
+
 package main
 
 import (
@@ -9,6 +11,7 @@ import (
 
 	"github.com/nats-io/nats.go"
 	basev1 "roundinternet.money/protos/gen/dex/base/v1"
+	pb "roundinternet.money/protos/gen/dex/base/v1"
 )
 
 var ErrMatch = errors.New("invalid request: dex does not match")
@@ -41,6 +44,25 @@ func (s *DexAssetService) matchKind(ds basev1.PayloadKind) bool {
 	return false
 }
 
+func (s *DexAssetService) matchRelatedAsset(related string, known []*pb.Asset) *pb.Asset {
+	for _, k := range known {
+		if k.Ticker == related {
+			return k
+		}
+	}
+	return nil
+}
+
+func (s *DexAssetService) matchRelatedAssets(related []string, known []*pb.Asset) []*pb.Asset {
+	out := make([]*pb.Asset, 0)
+	for _, r := range related {
+		if found := s.matchRelatedAsset(r, known); found != nil {
+			out = append(out, found)
+		}
+	}
+	return out
+}
+
 func (s *DexAssetService) StreamAsset(ctx context.Context, req *basev1.StreamAssetRequest, stream *basev1.ReaderService_StreamAsset_Stream,
 ) error {
 	return nil
@@ -70,6 +92,9 @@ func (s *DexAssetService) DexAsset(ctx context.Context, req *basev1.DexAssetRequ
 ) (*basev1.DexAssetResponse, error) {
 	if !s.matchDex(req.Dexes) {
 		return nil, ErrMatch
+	}
+	if len(req.RelatedAssets) > 0 {
+		return &basev1.DexAssetResponse{A: s.matchRelatedAssets(req.RelatedAssets, s.assets)}, nil
 	}
 	fmt.Println(req.String())
 	fmt.Println(s.assets)
