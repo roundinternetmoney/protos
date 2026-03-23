@@ -1,3 +1,4 @@
+// compares 2 assets, 2 identical lists of assets, and 2 differing length asset lists
 package main
 
 import (
@@ -6,6 +7,7 @@ import (
 	basev1 "roundinternet.money/protos/gen/dex/base/v1"
 )
 
+// compare succesfuly, then change the lengths of the lists
 func main() {
 	one := &basev1.Asset{
 		Id:          "BTC-USD",
@@ -35,4 +37,13 @@ func main() {
 	}
 
 	fmt.Printf("Asset lists equal: %v\n", three.Eq(four))
+
+	five := &basev1.DexAssetResponse{
+		A: []*basev1.Asset{one, one, one, one},
+	}
+	six := &basev1.DexAssetResponse{
+		A: []*basev1.Asset{two, two, two, },
+	}
+
+	fmt.Printf("Asset lists equal: %v\n", five.Eq(six))	
 }

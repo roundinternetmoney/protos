@@ -1,3 +1,4 @@
+// example nats client using nats/micro and protoc-gen-nats
 package main
 
 import (

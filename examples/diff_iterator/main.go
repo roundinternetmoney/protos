@@ -1,3 +1,4 @@
+// systhesize an order book and iterate over each side
 package main
 
 import (
