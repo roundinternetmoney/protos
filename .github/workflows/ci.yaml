@@ -25,7 +25,7 @@ on:
       - ".github/workflows/**"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   buf:
@@ -36,3 +36,6 @@ jobs:
         with:
           token: ${{ secrets.BUF_TOKEN }}
           pr_comment: false
+
+      - name: build
+        run: make buf
